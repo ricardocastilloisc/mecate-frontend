@@ -1,1 +1,30 @@
-<p>datos-sql works!</p>
+<div class="container">
+  <h2>Datos del Backend</h2>
+
+  <div *ngIf="aeropuertoMayorMovimiento">
+    <h3>Aeropuerto con Mayor Movimiento</h3>
+    <p>Aeropuerto: {{ aeropuertoMayorMovimiento?.aeropuerto }}</p>
+    <p>Cantidad de Vuelos: {{ aeropuertoMayorMovimiento?.cantidad_vuelos }}</p>
+  </div>
+
+  <div *ngIf="aerolineaMayorVuelos">
+    <h3>Aerolínea con Mayor Cantidad de Vuelos</h3>
+    <p>Aerolínea: {{ aerolineaMayorVuelos?.aerolinea }}</p>
+    <p>Cantidad de Vuelos: {{ aerolineaMayorVuelos?.cantidad_vuelos }}</p>
+  </div>
+
+  <div *ngIf="diaMayorVuelos">
+    <h3>Día con Mayor Cantidad de Vuelos</h3>
+    <p>Día: {{ diaMayorVuelos?.dia }}</p>
+    <p>Cantidad de Vuelos: {{ diaMayorVuelos?.cantidad_vuelos }}</p>
+  </div>
+
+  <div *ngIf="aerolineasMasDe2Vuelos && aerolineasMasDe2Vuelos.length">
+    <h3>Aerolíneas con Más de 2 Vuelos por Día</h3>
+    <div *ngFor="let item of aerolineasMasDe2Vuelos">
+      <p>Aerolínea: {{ item.aerolinea }}</p>
+      <p>Día: {{ item.dia }}</p>
+      <p>Cantidad de Vuelos: {{ item.cantidad_vuelos }}</p>
+    </div>
+  </div>
+</div>
