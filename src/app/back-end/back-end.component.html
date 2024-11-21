@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Datos del Backend</h2>
+
+  <div *ngIf="answeredStatus">
+    <h3>Estado de respuestas</h3>
+    <p>Respuestas contestadas: {{ answeredStatus?.answered }}</p>
+    <p>Respuestas no contestadas: {{ answeredStatus?.unanswered }}</p>
+  </div>
+
+  <div *ngIf="highestReputation">
+    <h3>Respuesta con mayor reputación</h3>
+    <p>Reputación: {{ highestReputation?.highest_reputation?.owner?.reputation }}</p>
+    <p>Vistas: {{ highestReputation?.highest_reputation?.view_count }}</p>
+  </div>
+
+  <div *ngIf="lowestViews">
+    <h3>Respuesta con menos vistas</h3>
+    <p>Reputación del dueño: {{ lowestViews?.lowest_views?.owner?.reputation }}</p>
+    <p>Vistas: {{ lowestViews?.lowest_views?.view_count }}</p>
+  </div>
+
+  <div *ngIf="oldestNewest">
+    <h3>Respuesta más vieja y más nueva</h3>
+    <p>Más vieja - Fecha: {{ oldestNewest?.oldest?.creation_date }} | Vistas: {{ oldestNewest?.oldest?.view_count }}</p>
+    <p>Más nueva - Fecha: {{ oldestNewest?.newest?.creation_date }} | Vistas: {{ oldestNewest?.newest?.view_count }}</p>
+  </div>
+
+  <div *ngIf="leastViewed">
+    <h3>Respuesta con menos vistas (punto adicional)</h3>
+    <p>Título: {{ leastViewed?.least_viewed?.title }}</p>
+    <p>Vistas: {{ leastViewed?.least_viewed?.view_count }}</p>
+  </div>
+</div>
