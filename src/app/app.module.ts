@@ -12,6 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'; // Para la barra d
 import { MatButtonModule } from '@angular/material/button'; // Para los botones de Material
 import { MatIconModule } from '@angular/material/icon'; // Para los íconos de Material
 import { HttpClientModule } from '@angular/common/http'; // Para las peticiones HTTP
+
 @NgModule({
   declarations: [
     AppComponent,
