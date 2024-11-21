@@ -4,10 +4,18 @@ import { environment } from 'src/environments/environment';
 import Chart from 'chart.js/auto';
 
 // Interfaces de datos
+
+/**
+ * Interfaz para el estado de respuestas.
+ */
 interface AnsweredStatus {
   answered: number;
   unanswered: number;
 }
+
+/**
+ * Interfaz para la reputación más alta.
+ */
 interface HighestReputation {
   highest_reputation: {
     owner: {
@@ -16,6 +24,10 @@ interface HighestReputation {
     view_count: number;
   };
 }
+
+/**
+ * Interfaz para las vistas más bajas.
+ */
 interface LowestViews {
   lowest_views: {
     owner: {
@@ -24,41 +36,81 @@ interface LowestViews {
     view_count: number;
   };
 }
+
+/**
+ * Interfaz para la fecha de creación más antigua y más nueva.
+ */
 interface OldestNewest {
   oldest: { creation_date: string; view_count: number };
   newest: { creation_date: string; view_count: number };
 }
+
+/**
+ * Interfaz para el elemento menos visto.
+ */
 interface LeastViewed {
   least_viewed: { view_count: number; title: string };
 }
+
+/**
+ * Interfaz para el aeropuerto con mayor movimiento.
+ */
 interface AeropuertoMayorMovimiento {
   aeropuerto: string;
   cantidad_vuelos: number;
 }
+
+/**
+ * Interfaz para la aerolínea con más vuelos.
+ */
 interface AerolineaMayorVuelos {
   aerolinea: string;
   cantidad_vuelos: number;
 }
+
+/**
+ * Interfaz para el día con más vuelos.
+ */
 interface DiaMayorVuelos {
   dia: string;
   cantidad_vuelos: number;
 }
+
+/**
+ * Interfaz para las aerolíneas con más de 2 vuelos.
+ */
 interface AerolineasMasDe2Vuelos {
   aerolinea: string;
   dia: string;
   cantidad_vuelos: number;
 }
 
+/**
+ * Componente que maneja las visualizaciones de datos relacionados con vuelos y reputaciones.
+ * Utiliza Chart.js para generar gráficos basados en los datos obtenidos desde la API.
+ */
 @Component({
   selector: 'app-front-end',
   templateUrl: './front-end.component.html',
   styleUrls: ['./front-end.component.scss'],
 })
 export class FrontEndComponent implements OnInit {
-  public charts: { [key: string]: Chart  }  = {}; // Almacena las gráficas generadas
+  /**
+   * Almacena las gráficas generadas.
+   * @type {Record<string, Chart>}
+   */
+  public charts: { [key: string]: Chart } = {};
 
+  /**
+   * Constructor del componente.
+   * @param {HttpClient} http - Servicio HTTP para realizar solicitudes a la API.
+   */
   constructor(private http: HttpClient) {}
 
+  /**
+   * Método que se ejecuta cuando el componente es inicializado.
+   * Carga todos los datos necesarios para mostrar las gráficas.
+   */
   ngOnInit(): void {
     this.loadAnsweredStatus();
     this.loadHighestReputation();
@@ -71,6 +123,9 @@ export class FrontEndComponent implements OnInit {
     this.loadAerolineasMasDe2Vuelos();
   }
 
+  /**
+   * Carga el estado de las respuestas y genera la gráfica de estado de respuestas.
+   */
   private loadAnsweredStatus(): void {
     this.http
       .get<AnsweredStatus>(`${environment.dominioPersonal}/api/section1/answered-status`)
@@ -90,6 +145,9 @@ export class FrontEndComponent implements OnInit {
       });
   }
 
+  /**
+   * Carga la reputación más alta y genera la gráfica de la reputación más alta.
+   */
   private loadHighestReputation(): void {
     this.http
       .get<HighestReputation>(`${environment.dominioPersonal}/api/section1/highest-reputation`)
@@ -109,6 +167,9 @@ export class FrontEndComponent implements OnInit {
       });
   }
 
+  /**
+   * Carga las vistas más bajas y genera la gráfica de vistas más bajas.
+   */
   private loadLowestViews(): void {
     this.http
       .get<LowestViews>(`${environment.dominioPersonal}/api/section1/lowest-views`)
@@ -128,6 +189,9 @@ export class FrontEndComponent implements OnInit {
       });
   }
 
+  /**
+   * Carga los datos más antiguos y más nuevos y genera la gráfica de antigüedad.
+   */
   private loadOldestNewest(): void {
     this.http
       .get<OldestNewest>(`${environment.dominioPersonal}/api/section1/oldest-newest`)
@@ -148,6 +212,9 @@ export class FrontEndComponent implements OnInit {
       });
   }
 
+  /**
+   * Carga el elemento menos visto y genera la gráfica correspondiente.
+   */
   private loadLeastViewed(): void {
     this.http
       .get<LeastViewed>(`${environment.dominioPersonal}/api/section1/least-viewed`)
@@ -167,13 +234,16 @@ export class FrontEndComponent implements OnInit {
       });
   }
 
+  /**
+   * Carga los datos del aeropuerto con mayor movimiento y genera la gráfica correspondiente.
+   */
   private loadAeropuertoMayorMovimiento(): void {
     this.http
       .get<AeropuertoMayorMovimiento>(
         `${environment.dominioPersonal}/api/section2/aeropuerto-mayor-movimiento`
       )
       .subscribe((data) => {
-         new Chart('aeropuertoMayorMovimientoChart', {
+        new Chart('aeropuertoMayorMovimientoChart', {
           type: 'pie',
           data: {
             labels: [data.aeropuerto],
@@ -188,6 +258,9 @@ export class FrontEndComponent implements OnInit {
       });
   }
 
+  /**
+   * Carga los datos de la aerolínea con más vuelos y genera la gráfica correspondiente.
+   */
   private loadAerolineaMayorVuelos(): void {
     this.http
       .get<AerolineaMayorVuelos>(
@@ -209,6 +282,9 @@ export class FrontEndComponent implements OnInit {
       });
   }
 
+  /**
+   * Carga los datos del día con más vuelos y genera la gráfica correspondiente.
+   */
   private loadDiaMayorVuelos(): void {
     this.http
       .get<DiaMayorVuelos>(`${environment.dominioPersonal}/api/section2/dia-mayor-vuelos`)
@@ -229,6 +305,9 @@ export class FrontEndComponent implements OnInit {
       });
   }
 
+  /**
+   * Carga los datos de las aerolíneas con más de 2 vuelos y genera la gráfica correspondiente.
+   */
   private loadAerolineasMasDe2Vuelos(): void {
     this.http
       .get<AerolineasMasDe2Vuelos[]>(
@@ -237,11 +316,10 @@ export class FrontEndComponent implements OnInit {
       .subscribe((data) => {
         const labels = data.map((item) => item.aerolinea);
         const values = data.map((item) => item.cantidad_vuelos);
-
-        this.charts['aerolineasMasDe2Vuelos'] = new Chart('aerolineasMasDe2VuelosChart', {
+        new Chart('aerolineasMasDe2VuelosChart', {
           type: 'bar',
           data: {
-            labels,
+            labels: labels,
             datasets: [
               {
                 data: values,
