@@ -36,7 +36,15 @@ Este proyecto requiere que se configure una variable de entorno para el dominio 
 El archivo `set-env.js` establecerá automáticamente la variable de entorno para que pueda ser utilizada en la aplicación sin necesidad de modificar el código fuente. Es recomendable ejecutar este paso antes de iniciar el proyecto.
 
 ---
+## Levantar el Frontend en Docker
 
+Para levantar el proyecto en un contenedor Docker, sigue estos paso:
+
+1. **Construir y levantar los contenedores**:  
+   Desde el directorio raíz del proyecto, ejecuta el siguiente comando para construir la imagen y levantar el contenedor:
+
+   ```bash
+   docker-compose up --build -d 
 
 ### Documentation
 

@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: .                # Contexto de construcción: el directorio actual donde se encuentra el Dockerfile y los archivos relevantes
+      dockerfile: Dockerfile     # Especifica el nombre del Dockerfile a usar para la construcción
+      args:                      # Aquí se definen los argumentos de construcción que se pasarán al Dockerfile
+        dominio_personal: ${dominio_personal}  # Pasa la variable de entorno dominio_personal desde el archivo .env o desde las variables de entorno del sistema al contenedor durante la construcción
+
+    ports:
+      - "8089:8089"              # Mapea el puerto 8089 del contenedor al puerto 8089 del host para que sea accesible desde fuera del contenedor
+
+    stdin_open: true             # Mantiene el flujo de entrada abierto, lo que puede ser útil para sesiones interactivas
+    tty: true                    # Permite la asignación de un terminal (TTY), útil para el modo interactivo

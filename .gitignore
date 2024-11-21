@@ -46,3 +46,4 @@ Thumbs.db
 environment.ts
 environment.prod.ts
 .vscode/settings.json
+.env
