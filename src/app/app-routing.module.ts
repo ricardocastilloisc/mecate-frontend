@@ -5,7 +5,7 @@ import { DatosSqlComponent } from './datos-sql/datos-sql.component';
 import { FrontEndComponent } from './front-end/front-end.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/back-end', pathMatch: 'full' },
+  { path: '', redirectTo: '/datos-sql', pathMatch: 'full' },
   { path: 'back-end', component: BackEndComponent },
   { path: 'datos-sql', component: DatosSqlComponent },
   { path: 'front-end', component: FrontEndComponent },
